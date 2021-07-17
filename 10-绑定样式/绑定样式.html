@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../01-初识Vue/js/vue.js"></script>
+    <style>
+        .demo {
+            background-color: red;
+        }
+
+        .normal {
+            background-color: yellow;
+        }
+
+        .demo2 {
+            background-color: skyblue;
+        }
+
+        .atguigu1 {
+            color: springgreen;
+        }
+
+        .atguigu2 {
+            background: 1px solid black;
+        }
+
+        .atguigu3 {
+            height: 100px;
+            width: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 绑定class样式--字符串写法，适用于：样式的类名不确定，需要动态指定-->
+        <!-- <div :class="classArr" @click="changeMood">{{name}}</div> -->
+
+        <!-- 绑定class样式--数组写法，适用于：要绑定的样式个数不确定，名字也不确定-->
+        <div class="classArr">{{name}}</div>
+
+        <!-- 绑定class样式--对象写法，适用于：要绑定的样式个数确定，名字也确定，但要动态决定用不用-->
+        <div :class="classObj">{{name}}</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'cx66666',
+                normal: 'normal',
+                classArr: ['atguigu1', 'atguigu2', 'atguigu3'],
+                classObj: {
+                    atguigu1: false,
+                    atguigu2: false 
+                }
+            },
+            methods: {
+                changeMood() {
+                    const arr = ['demo', 'demo2', 'normal']
+                    this.normal = arr[Math.floor(Math.random()*3)]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

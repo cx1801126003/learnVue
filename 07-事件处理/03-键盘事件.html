@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../01-初识Vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>欢迎{{name}}</h2>
+        <input type="text" placeholder="按下回车提示输入" @keyup.enter="showInfo">
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'cx'
+            },
+            methods: {
+                showInfo(e) {
+                //    if (e.keyCode != 13) {
+                //         return 
+                //    } else {
+                //        console.log(e.target.value)
+                //    }
+                    console.log(e.target.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
