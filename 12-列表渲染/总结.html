@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../01-初识Vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>学生信息</h1>
+
+        <button @click="student.age++">点击按钮年龄加一</button>
+        <button @click="addSex">点击添加一个性别属性，默认值：男</button>
+        <button @click="addFriend">在列表首页添加一个朋友</button>
+        <button @click="changeFriend">修改第一个朋友名字： 张三</button>
+        <button @click="addHobby">添加一个爱好</button>
+        <button @click="changeHobby">修改第一个爱好为： 开车</button>
+
+
+        <h3>姓名： {{student.name}}</h3>
+        <h3 v-if="student.sex">性别： {{student.sex}}</h3>
+        <h3>年龄： {{student.age}}</h3>
+        <h3>爱好： </h3>
+        <ul>
+            <li v-for="h in student.hobby" :key="h.index">
+                {{h}}
+            </li>
+        </ul>
+        <h3>朋友们</h3>
+        <ul>
+            <li v-for="f in student.friend" :key="f.index">
+                {{f.name}} --- {{f.age}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                student: {
+                    name: 'tom',
+                    age: 18,
+                    hobby: ['羽毛球', '篮球', '足球'],
+                    friend: [
+                        {name: 'jamy', age: 19},
+                        {name: 'baus', age: 20}
+                    ]
+                }
+            },
+            methods:{
+                addSex() {
+                    Vue.set(this.student, 'sex', '男')
+                },
+                addFriend() {
+                    this.student.friend.unshift({name: 'wang三', age: 40})
+                },
+                changeFriend() {
+                    this.student.friend[0].name = "张三"
+                },
+                addHobby() {
+                    this.student.hobby.push('学习 ')
+                },
+                changeHobby() {
+                    this.student.hobby.splice(0, 1, '开车')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

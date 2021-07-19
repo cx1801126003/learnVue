@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../01-初识Vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <app></app>
+    </div>
+
+    <script>
+
+        const student = Vue.extend({
+            name: 'student',
+            template: `
+                <div>
+                    <h4>学生名字: {{name}}</h4>
+                    <h4>学生年龄: {{age}}</h4>    
+                </div>
+            `,
+            data() {
+                return {
+                    name: 'cx',
+                    age: 21
+                }
+            }
+        })
+        const school = Vue.extend({
+            name: 'school',
+            template: `
+                <div>
+                    <h2>学校名称：{{name}}</h2>
+                    <h2>学校地址：{{address}}</h2>    
+                    <student></student> 
+                </div>
+            `,
+            data() {
+                return {
+                    name: '理工大学',
+                    address: '福建'
+                }
+            },
+            components: {
+                student
+            }
+        })
+        const hello = Vue.extend({
+            name: 'hello',
+            template: `<h1>{{msg}}</h1>`,
+            data() {
+                return {
+                    msg: 'Huanying'
+                }
+            }
+        })
+        const app = Vue.extend({
+            template: `
+                <div>
+                    <school></school>
+                    <hello></hello>    
+                </div>
+            `,
+            components: {
+                school,
+                hello   
+            }
+        })
+        new Vue({
+            el: '#app',
+            components: {
+                app
+            }
+        })
+    </script>
+</body>
+</html>

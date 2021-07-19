@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../01-初识Vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="app"> 
+        <!--3.编写组件标签-->
+        <school></school>
+        <hr/>
+        <student></student>
+        <hello></hello>
+    </div>
+
+    <script>
+        //1.创建组件
+        const school = Vue.extend({
+            // el: "#app", //一定不要写el配置项，因为最终所有的组件都要为一个vm管理，由vm决定要服务用哪个容器。
+
+            template: `
+                <div>
+                    <h2>学校名称: {{schoolName}}</h2>
+                    <h2>学校地址: {{address}}</h2> 
+                    <button @click="showName">点我提示学校名</button>
+                </div>
+            `,
+            data() {
+                return {
+                    schoolName: '理工学院',
+                    address: '北京昌平',
+                }
+            },
+            methods: {
+                showName() {
+                    alert(this.schoolName)
+                }
+            }
+
+        })
+        const student = Vue.extend({
+            template: `
+                <div>
+                    <h2>学生姓名: {{studentName}}</h2>
+                    <h2>学生年龄: {{age}}</h2>    
+                </div>
+            `,
+            data() {
+                return {
+                    studentName: "张三",
+                    age: 18
+                }
+            }
+        })
+        const hello = Vue.extend({
+            template: `
+                <div>
+                    <h2>{{name}}</h2>    
+                </div>
+            `,
+            data() {
+                return {
+                    name: '你好啊'
+                }
+            }
+        })
+
+        //2.全局注册
+        Vue.component('hello', hello)
+        // const vm = new Vue({
+        //     el: "#app",
+        //     data: {
+        //         schoolName: '理工学院',
+        //         address: '北京昌平',
+        //         studentName: "张三",
+        //         age: 18
+        //     }
+        // })
+
+        //
+        new Vue({
+            el: '#app',
+            //2.注册组件（局部注册）
+            components: {
+                school,
+                student
+            }
+        })
+    </script>
+</body>
+</html>

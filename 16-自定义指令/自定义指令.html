@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../01-初识Vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>当前的值为{{n}}</h3>
+        <h3>放大的值为<span v-big="n"></span></h3>
+        <button @click="addN">点击按钮n+1</button>
+        <hr/>
+
+        <input type="text" v-fbind:value="n">
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                n: 1
+            },
+            directives: {
+                //big函数何时会被调用？ 1.指令与元素成功绑定（一上来） 2.指令所在的模板被重新解析时
+                big(element, binding) {
+                    console.log('big')
+                    element.innerText = binding.value * 10
+                },
+                // fbind(element, binding) {
+                //     element.value = binding.value
+                // }
+                fbind: {
+                    //指令与元素成功绑定时（一上来）
+                    bind(element, binding) {
+                        element.value = binding.value
+                    },
+                    //指令所在元素被插入页面时
+                    inserted(element, binding) {
+                        element.focus()
+                    },
+                    //指令所在的模板被重新解析时
+                    update(element, binding) {
+                        element.value = binding.value
+                        element.focus()
+                    }
+                }   
+            },
+            methods: {
+                addN() {
+                    this.n++
+                }
+            }
+        })
+    </script>
+</body>
+</html>

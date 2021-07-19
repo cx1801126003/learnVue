@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../01-初识Vue/js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <form @submit.prevent="funDemo">
+            <label for="demo">账号：</label>
+            <input type="text" id="demo" v-model.trim="account"> <br/> <br/>
+            <label for="demo2">密码：</label>
+            <input type="password" id="demo2" v-model="password"> <br/> <br/>
+            性别：
+            男: <input type="radio" name="sex" value="male" v-model="sex">
+            女：<input type="radio" name="sex" value="female" v-model="sex"> <br/> <br/>
+            爱好：
+            学习：<input type="checkbox" value="study" v-model="hobby">
+            打游戏：<input type="checkbox" value="game" v-model="hobby">
+            吃饭：<input type="checkbox" value="eat" v-model="hobby"> <br/> <br/>
+            所属校区
+            <select v-model="city">
+                <option value="">请选择校区</option>
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="shenzhen">深圳</option>
+                <option value="wuhan">武汉</option>
+            </select> <br/> <br/>
+            其他信息： 
+            <textarea v-model.lazy="text"></textarea> <br/> <br/>
+            <input type="checkbox" v-model="agree">阅读并接受<a href="www.baidu.com">用户协议</a> <br/> <br/>
+            <button>提交</button>
+        </form>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                account: '',
+                password: '',
+                sex: 'female',
+                hobby: [],
+                city: '',
+                text: '',
+                agree: ''
+
+            },
+            methods: {
+                funDemo() {
+                    console.log(JSON.stringify(this._data))
+                }
+            }
+        })
+    </script>
+</body>
+</html>
